@@ -1,8 +1,10 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
+import { connect } from 'react-redux'
 
-export default class LinksScreen extends React.Component {
+
+class StatsScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
   };
@@ -17,6 +19,12 @@ export default class LinksScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return { trackers, today, history } = state
+};
+
+export default connect(mapStateToProps)(StatsScreen);
 
 const styles = StyleSheet.create({
   container: {

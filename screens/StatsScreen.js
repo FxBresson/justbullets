@@ -1,20 +1,40 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { 
+  View,
+  Text,
+  ScrollView, 
+  StyleSheet 
+} from 'react-native';
 import { connect } from 'react-redux'
 
 
 class StatsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Links',
+    title: 'Stats',
   };
+
+  _renderTrackerValue(index, goal) {
+    let goalText = goal !== null ? `/${goal}` : ''
+    return (
+      <View>
+        <Text>{this.props.today.find((e) => e.id === index).value}{goalText}</Text>
+      </View>
+    )
+  }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
+        {this.props.trackers.map((tracker, i) => {
+          return (
+            <View key={i}>
+              <Text>{tracker.title}</Text>
+              <View>
+                {this._renderTrackerValue(i, tracker.goal)}
+              </View>
+            </View>
+          )
+        })}
       </ScrollView>
     );
   }

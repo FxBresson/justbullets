@@ -9,11 +9,57 @@ import rootReducer from './reducers/index'
 
 
 const defaultState = {
-
+  trackers: [
+    {
+        id: 0,
+        title: "Sport",
+        type: "normal",
+        period: "week",
+        goal: 2,
+    },
+    {
+        id: 1,
+        title: "Sleep",
+        type: "normal",
+        period: "day",
+        goal: null,
+    },
+    {
+        id: 2,
+        title: "Period",
+        type: "normal",
+        period: "day",
+        goal: 1,
+    },
+    {
+        id: 3,
+        title: "Cinema",
+        type: "normal",
+        period: "month",
+        goal: 4,
+    },
+    {
+        id: 4,
+        title: "Mood",
+        type: "mood",
+        period: "day",
+        goal: null,
+    }
+  ],
+  today: [
+  ]
 }
 
+defaultState.today = defaultState.trackers.map(tracker => {
+  return {
+    id: tracker.id,
+    value: tracker.type === "normal" ? 0 : ""
+  }
+})
+
 const store = createStore(
-  rootReducer
+  rootReducer,
+  defaultState
 )
 
 export default class App extends React.Component {

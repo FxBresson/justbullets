@@ -12,7 +12,7 @@ import { WebBrowser } from 'expo'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { commons } from '../styles'
+import { commons, button } from '../styles'
 import MiddleTitle from '../components/MiddleTitle'
 import InputTracker from '../components/InputTracker'
 
@@ -31,37 +31,42 @@ class HomeScreen extends React.Component {
   }
 
   _renderMoodTracker(tracker, index) {
+    let value = this.props.today.find(e => e.id === index).value
+    console.log(value)
     return (
       <View key={index}>
         <MiddleTitle>{tracker.title}</MiddleTitle>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           <Button
-            buttonStyle={commons.button}
+            buttonStyle={[commons.button, value === 'happy' && button.check]}
             onPress={() => this.props.selectMood(index, 'happy')}
             title="Happy"
           />
           <Button
-            buttonStyle={commons.button}
+            buttonStyle={[commons.button, value === 'sad' && button.check]}
             onPress={() => this.props.selectMood(index, 'sad')}
             title="Sad"
           />
           <Button
-            buttonStyle={commons.button}
+            buttonStyle={[commons.button, value === 'neutral' && button.check]}
             onPress={() => this.props.selectMood(index, 'neutral')}
             title="Neutral"
           />
           <Button
-            buttonStyle={commons.button}
+            buttonStyle={[commons.button, value === 'angry' && button.check]}
             onPress={() => this.props.selectMood(index, 'angry')}
             title="Angry"
           />
           <Button
-            buttonStyle={commons.button}
+            buttonStyle={[
+              commons.button,
+              value === 'frustrated' && button.check,
+            ]}
             onPress={() => this.props.selectMood(index, 'frustrated')}
             title="Frustrated"
           />
           <Button
-            buttonStyle={commons.button}
+            buttonStyle={[commons.button, value === 'confused' && button.check]}
             onPress={() => this.props.selectMood(index, 'confused')}
             title="Confused"
           />

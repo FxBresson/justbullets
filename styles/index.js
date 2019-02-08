@@ -9,4 +9,10 @@ const commons = StyleSheet.create({
   },
 })
 
-export { commons }
+const button = StyleSheet.create({
+  check: {
+    backgroundColor: '#00FF00',
+  },
+})
+
+export { commons, button }

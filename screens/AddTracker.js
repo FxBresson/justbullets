@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, View, StyleSheet } from 'react-native'
+import { Button, View } from 'react-native'
 import { compose } from 'recompose'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -15,6 +15,8 @@ import { bindActionCreators } from 'redux'
 import { addTracker } from '../action'
 import BigTitle from '../components/BigTitle'
 
+import { commons } from '../styles'
+
 const Input = compose(
   makeInputGreatAgain,
   withNextInputAutoFocusInput,
@@ -27,27 +29,32 @@ const Form = withNextInputAutoFocusForm(View)
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('need a title !'),
-  goal: Yup.number('not a number'),
+  goal: Yup.number('not a number').max(10, "le maximum c'est 10"),
   type: Yup.string().required('need a type !'),
   period: Yup.string().required('need a period !'),
 })
 
 class AddTracker extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'Add Tracker',
   }
-  submit = (values) => {
+  submit = values => {
+    console.log(values)
     this.props.addTracker(values)
   }
   render = () => {
-    // ajouter une prop label pour changer le texte ecrit dans le dropdown
+    // ajouter une key label pour changer le texte ecrit dans le dropdown
     const types = [{ value: 'normal' }, { value: 'mood' }, { value: 'bool' }]
     const period = [{ value: 'day' }, { value: 'week' }, { value: 'month' }]
 
     return (
-      <View style={styles.form}>
-        <BigTitle>Add Tracker</BigTitle>
+      <View style={commons.paddingPage}>
         <Formik
+          initialValues={{
+            period: period[0].value,
+            type: types[0].value,
+            goal: '1',
+          }}
           onSubmit={this.submit}
           validationSchema={validationSchema}
           render={props => {
@@ -56,12 +63,14 @@ class AddTracker extends React.Component {
                 <Input label="Title" name="title" type="text" />
                 <Dropdown label="Type" data={types} name="type" />
                 <Dropdown label="Period" data={period} name="period" />
-                <Input
-                  label="Goal"
-                  name="goal"
-                  type="number"
-                  keyboardType="numeric"
-                />
+                {props.values.type === 'normal' && (
+                  <Input
+                    label="Goal"
+                    name="goal"
+                    type="number"
+                    keyboardType="numeric"
+                  />
+                )}
 
                 <Button onPress={props.handleSubmit} title="ADD" />
               </Form>
@@ -87,10 +96,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(AddTracker)
-
-const styles = StyleSheet.create({
-  form: {
-    padding: 24,
-    paddingTop: 48,
-  },
-})

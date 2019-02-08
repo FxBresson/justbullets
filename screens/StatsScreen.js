@@ -10,7 +10,7 @@ class StatsScreen extends React.Component {
   }
 
   _renderTrackerValue(index, goal, type) {
-    let goalText = goal !== null ? `/${goal}` : ''
+    let goalText = goal !== null && goal !== undefined ? `/${goal}` : ''
     let value = this.props.today.find(e => e.id === index).value
     let valueText = type === 'bool' ? value ? 'Done' : 'Not Done' : value
     return (

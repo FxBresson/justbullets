@@ -86,7 +86,9 @@ class HomeScreen extends React.Component {
           key={i}
           checked={checked}
           onPress={() => {
-            if (canPress) this.handleCheckbox(checked, index)
+            if (canPress) { 
+              this.handleGoalCheckbox(checked, index)
+            }
           }}
         />,
       )

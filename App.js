@@ -14,7 +14,7 @@ import { defaultValue } from './helper'
 const defaultState = {
   trackers: [
     {
-      id: 4,
+      id: 0,
       title: "Comment ça va aujourd'hui ?",
       type: 'mood',
       period: 'day',
@@ -22,37 +22,36 @@ const defaultState = {
         active: true
     },
     {
-      id: 0,
+      id: 1,
       title: 'Invoquer Satan',
       type: 'normal',
       period: 'week',
       goal: 2,
-        active: true
-    },
-    {
-      id: 1,
-      title: 'Nourrir Toothless',
-      type: 'normal',
-      period: 'day',
-      goal: null,
-        active: true
+      active: true
     },
     {
       id: 2,
+      title: 'Nourrir Toothless',
+      type: 'bool',
+      period: 'day',
+      active: true
+    },
+    {
+      id: 3,
       title: 'Règles',
       type: 'normal',
       period: 'day',
       goal: 1,
-        active: true
+      active: true
     },
     {
-      id: 3,
+      id: 4,
       title: 'Cinéma',
       type: 'normal',
       period: 'month',
       goal: 4,
+      active: true
     },
-        active: true
   ],
   today: [],
 }

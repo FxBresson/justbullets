@@ -53,7 +53,6 @@ class AddTracker extends React.Component {
           initialValues={{
             period: period[0].value,
             type: types[0].value,
-            goal: '1',
           }}
           onSubmit={this.submit}
           validationSchema={validationSchema}

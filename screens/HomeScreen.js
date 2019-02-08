@@ -12,7 +12,7 @@ import { WebBrowser } from 'expo'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { commons, button } from '../styles'
+import { commons, button, checkbox } from '../styles'
 import MiddleTitle from '../components/MiddleTitle'
 import InputTracker from '../components/InputTracker'
 
@@ -32,7 +32,6 @@ class HomeScreen extends React.Component {
 
   _renderMoodTracker(tracker, index) {
     let value = this.props.today.find(e => e.id === index).value
-    console.log(value)
     return (
       <View key={index}>
         <MiddleTitle>{tracker.title}</MiddleTitle>
@@ -94,15 +93,19 @@ class HomeScreen extends React.Component {
       let checked = i <= curr
       let canPress = i <= curr + 1
       checkboxes.push(
-        <CheckBox
+        <TouchableOpacity
+          style={[checkbox.default, checked && checkbox.check]}
           key={i}
-          checked={checked}
           onPress={() => {
             if (canPress) {
               this.handleGoalCheckbox(checked, index)
             }
           }}
-        />,
+        >
+          <Text style={[checkbox.text, checked && checkbox.textCheck]}>
+            {i}
+          </Text>
+        </TouchableOpacity>,
       )
     }
 
@@ -122,14 +125,25 @@ class HomeScreen extends React.Component {
     return (
       <View key={index}>
         <MiddleTitle>{tracker.title}</MiddleTitle>
-        <View>
-          <CheckBox
-            checked={value}
-            onPress={() => {
-              this.handleBoolCheckbox(index)
-            }}
+        <TouchableOpacity
+          style={[
+            checkbox.default,
+            checkbox.toggleWrapper,
+            value && checkbox.check,
+            value && checkbox.toggleWrapperCheck,
+          ]}
+          onPress={() => {
+            this.handleBoolCheckbox(index)
+          }}
+        >
+          <View
+            style={[
+              checkbox.default,
+              checkbox.toggle,
+              value && checkbox.toggleCheck,
+            ]}
           />
-        </View>
+        </TouchableOpacity>
       </View>
     )
   }

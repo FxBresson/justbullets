@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { incrementTracker, decrementTracker } from '../action'
+import { commons, button } from '../styles'
 
 class InputTracker extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class InputTracker extends React.Component {
         <View style={styles.form}>
           <Button
             title="-"
+            buttonStyle={[commons.button, button.round]}
             onPress={() => {
               this.props.decrementTracker(tracker.id)
             }}
@@ -23,6 +25,7 @@ class InputTracker extends React.Component {
             <Text style={styles.input}>{value}</Text>
           </View>
           <Button
+            buttonStyle={[commons.button, button.round]}
             title="+"
             onPress={() => {
               this.props.incrementTracker(tracker.id)
@@ -37,7 +40,8 @@ class InputTracker extends React.Component {
 const styles = StyleSheet.create({
   form: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   inputWrapper: {
     flex: 1,
@@ -46,6 +50,7 @@ const styles = StyleSheet.create({
   },
   input: {
     textAlign: 'center',
+    fontWeight: '700',
   },
 })
 

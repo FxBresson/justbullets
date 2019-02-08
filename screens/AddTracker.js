@@ -36,9 +36,8 @@ class AddTracker extends React.Component {
   static navigationOptions = {
     header: null,
   }
-  submit = ({ period, ...rest }) => {
-    console.log(period, rest)
-    this.props.addTracker(period, rest)
+  submit = (values) => {
+    this.props.addTracker(values)
   }
   render = () => {
     // ajouter une prop label pour changer le texte ecrit dans le dropdown

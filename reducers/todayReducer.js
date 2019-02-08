@@ -3,7 +3,7 @@ const todayReducer = (state = [], action) => {
         case 'ADD_TRACKER': 
             let t = {
                 id: state.length,
-                value: 0
+                value: tracker.type === "normal" ? 0 : ""
             }
             return [...state, t]
 
@@ -21,7 +21,7 @@ const todayReducer = (state = [], action) => {
         case 'DECREMENT_TRACKER': 
             return state.map((e) => {
                 if (e.id === action.trackerId) {
-                    e.value = Math.max(0, e.value--)
+                    e.value = Math.max(0, --e.value)
                 }
                 return e
             })

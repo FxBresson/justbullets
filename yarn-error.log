@@ -1,30 +1,20 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add MaterialTextInput
+  /Users/fx/.nvm/versions/node/v10.15.0/bin/node /usr/local/Cellar/yarn/1.10.1/libexec/bin/yarn.js
 
 PATH: 
-  C:\Program Files\Docker\Docker\Resources\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\PuTTY\;C:\ProgramData\ComposerSetup\bin;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Users\Viococo\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin\;C:\HashiCorp\Vagrant\bin;C:\Users\Viococo\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\Viococo\AppData\Local\Programs\Python\Python37\;C:\Users\Viococo\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\wamp64\bin\php\php7.1.9;C:\Users\Viococo\AppData\Roaming\Composer\vendor\bin;C:\Users\Viococo\AppData\Roaming\npm;C:\Users\Viococo\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\4.0\bin;C:\Users\Viococo\AppData\Local\Yarn\bin
+  /opt/local/bin:/opt/local/sbin:/usr/local/php5/bin:/Users/fx/.nvm/versions/node/v10.15.0/bin:/Users/fx/.rvm/gems/ruby-2.3.1/bin:/Users/fx/.rvm/gems/ruby-2.3.1@global/bin:/Users/fx/.rvm/rubies/ruby-2.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/fx/.rvm/bin:/Development/android-sdk/platform-tools:/Development/android-sdk/tools
 
 Yarn version: 
-  1.12.1
+  1.10.1
 
 Node version: 
-  10.11.0
+  10.15.0
 
 Platform: 
-  win32 x64
+  darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/MaterialTextInput: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:62248:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:124547:22)
-      at Request.emit (events.js:182:13)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:125519:10)
-      at Request.emit (events.js:182:13)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:125441:12)
-      at Object.onceWrapper (events.js:273:13)
-      at IncomingMessage.emit (events.js:187:15)
-      at endReadableNT (_stream_readable.js:1092:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: EACCES: permission denied, unlink '/Applications/MAMP/htdocs/ecv/react-native/bullet/node_modules/.bin/atob'
 
 npm manifest: 
   {
@@ -46,6 +36,7 @@ npm manifest:
       "react": "16.5.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
       "react-native-formik": "^1.7.2",
+      "react-native-material-dropdown": "^0.11.1",
       "react-native-material-textfield": "^0.12.0",
       "react-navigation": "^3.0.9",
       "react-redux": "^6.0.0",
@@ -5739,6 +5730,38 @@ Lockfile:
   react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
     version "0.22.1"
     resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
+  
+  react-native-material-buttons@^0.5.0:
+    version "0.5.0"
+    resolved "https://registry.yarnpkg.com/react-native-material-buttons/-/react-native-material-buttons-0.5.0.tgz#ab2b3e3fc3f500ca713f51e9d75978aff602152a"
+    integrity sha1-qys+P8P1AMpxP1Hp11l4r/YCFSo=
+    dependencies:
+      prop-types "^15.5.9"
+      react-native-material-ripple "^0.7.0"
+  
+  react-native-material-dropdown@^0.11.1:
+    version "0.11.1"
+    resolved "https://registry.yarnpkg.com/react-native-material-dropdown/-/react-native-material-dropdown-0.11.1.tgz#c0fe434a8e617941ef910ba44d2f07c8f37584fe"
+    integrity sha1-wP5DSo5heUHvkQukTS8HyPN1hP4=
+    dependencies:
+      prop-types "^15.5.9"
+      react-native-material-buttons "^0.5.0"
+      react-native-material-ripple "^0.8.0"
+      react-native-material-textfield "^0.12.0"
+  
+  react-native-material-ripple@^0.7.0:
+    version "0.7.5"
+    resolved "https://registry.yarnpkg.com/react-native-material-ripple/-/react-native-material-ripple-0.7.5.tgz#e2af5110680532f14aea3c3a438247be2ffef659"
+    integrity sha1-4q9REGgFMvFK6jw6Q4JHvi/+9lk=
+    dependencies:
+      prop-types "^15.5.10"
+  
+  react-native-material-ripple@^0.8.0:
+    version "0.8.0"
+    resolved "https://registry.yarnpkg.com/react-native-material-ripple/-/react-native-material-ripple-0.8.0.tgz#b8c24e6fdea2af2a21e8468b1f40b35483019e2f"
+    integrity sha1-uMJOb96iryoh6EaLH0CzVIMBni8=
+    dependencies:
+      prop-types "^15.5.10"
   
   react-native-material-textfield@^0.12.0:
     version "0.12.0"

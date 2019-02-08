@@ -6,9 +6,11 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import StatsScreen from '../screens/StatsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import AddTracker from '../screens/AddTracker';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  Add: AddTracker
 });
 
 HomeStack.navigationOptions = {

@@ -13,9 +13,17 @@ import { WebBrowser } from 'expo';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
-import { selectMood } from '../action'
+import { 
+  selectMood,
+  incrementTracker,
+  decrementTracker
+} from '../action'
 
 import { MonoText } from '../components/StyledText';
+
+import { CheckBox } from 'react-native-elements'
+
+
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -26,7 +34,7 @@ class HomeScreen extends React.Component {
     return (
       <View key={index}>
         <Text>{tracker.title}</Text>
-        <View>
+        <View style={{flexDirection:'row'}}>
           <Button onPress={() => this.props.selectMood(index, "happy")} 
                   title="Happy">
           </Button>
@@ -47,10 +55,36 @@ class HomeScreen extends React.Component {
     )
   }
 
+  handleCheckbox(isChecked, trackerId) {
+    if (isChecked) {
+      this.props.decrementTracker(trackerId)
+    } else {
+      this.props.incrementTracker(trackerId)
+    }
+  }
+
   _renderGoalTracker(tracker, index) {
+    let curr = this.props.today.find((e) => e.id === index).value
+    let checkboxes = []
+    for (let i = 1; i <= tracker.goal; i++) {
+        let checked = i <= curr
+        let canPress = i <= curr + 1
+        checkboxes.push(
+          <CheckBox
+            key={i}
+            checked={checked}
+            onPress={() => {if(canPress) this.handleCheckbox(checked, index)}}
+
+          />
+        )
+    }
+
     return (
       <View key={index}>
         <Text>{tracker.title}</Text>
+        <View style={{flexDirection:'row'}}>
+          {checkboxes}
+        </View>
       </View>
     )
   }
@@ -72,6 +106,8 @@ class HomeScreen extends React.Component {
   }
 
   render() {
+    const {navigate} = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -91,6 +127,10 @@ class HomeScreen extends React.Component {
           })}
 
         </ScrollView>
+        <Button
+          title="AddTracker"
+          onPress={() => navigate('Add')}
+        />
       </View>
     );
   }
@@ -99,6 +139,8 @@ class HomeScreen extends React.Component {
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     selectMood,
+    incrementTracker,
+    decrementTracker
   }, dispatch)
 );
 

@@ -39,8 +39,8 @@ class AddTracker extends React.Component {
     title: 'Add Tracker',
   }
   submit = values => {
-    console.log(values)
     this.props.addTracker(values)
+    this.props.navigation.pop()
   }
   render = () => {
     // ajouter une key label pour changer le texte ecrit dans le dropdown

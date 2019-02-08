@@ -9,12 +9,14 @@ class StatsScreen extends React.Component {
     title: 'Stats',
   }
 
-  _renderTrackerValue(index, goal) {
+  _renderTrackerValue(index, goal, type) {
     let goalText = goal !== null ? `/${goal}` : ''
+    let value = this.props.today.find(e => e.id === index).value
+    let valueText = type === 'bool' ? value ? 'Done' : 'Not Done' : value
     return (
       <View>
         <Text>
-          {this.props.today.find(e => e.id === index).value}
+          {valueText}
           {goalText}
         </Text>
       </View>
@@ -24,11 +26,11 @@ class StatsScreen extends React.Component {
   render() {
     return (
       <ScrollView style={[styles.container, commons.paddingPage]}>
-        {this.props.trackers.map((tracker, i) => {
+        {this.props.trackers.filter(t => t.active === true).map((tracker, i) => {
           return (
             <View key={i}>
               <MiddleTitle>{tracker.title}</MiddleTitle>
-              <View>{this._renderTrackerValue(i, tracker.goal)}</View>
+              <View>{this._renderTrackerValue(i, tracker.goal, tracker.type)}</View>
             </View>
           )
         })}

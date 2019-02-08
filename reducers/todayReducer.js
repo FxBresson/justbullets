@@ -1,11 +1,13 @@
+import { defaultValue } from '../helper'
+
 const todayReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_TRACKER':
-      let t = {
-        id: state.length,
-        value: action.newTracker.type === 'normal' ? 0 : '',
-      }
-      return [...state, t]
+    switch (action.type) {
+        case 'ADD_TRACKER': 
+            let t = {
+                id: state.length,
+                value: defaultValue(action.newTracker.type)
+            }
+            return [...state, t]
 
     case 'REMOVE_TRACKER':
       return state.splice(state.findIndex(e => e === action.trackerId), 1)
@@ -18,13 +20,29 @@ const todayReducer = (state = [], action) => {
         return e
       })
 
-    case 'DECREMENT_TRACKER':
-      return state.map(e => {
-        if (e.id === action.trackerId) {
-          e.value = Math.max(0, --e.value)
-        }
-        return e
-      })
+        case 'DECREMENT_TRACKER': 
+            return state.map((e) => {
+                if (e.id === action.trackerId) {
+                    e.value = Math.max(0, --e.value)
+                }
+                return e
+            })
+
+        case 'TOGGLE_TRACKER':
+            return state.map((e) => {
+                if (e.id === action.trackerId) {
+                    e.value = !e.value
+                }
+                return e
+            })
+            
+        case 'SET_VALUE':
+            return state.map((e) => {
+                if (e.id === action.trackerId && !isNaN(action.value)) {
+                    e.value = action.value
+                }
+                return e
+            })
 
     case 'SET_VALUE':
       return state.map(e => {

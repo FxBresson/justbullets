@@ -18,6 +18,11 @@ export const decrementTracker = (trackerId) => ({
   trackerId: trackerId
 }) 
 
+export const toggleTracker = (trackerId) => ({
+  type: 'TOGGLE_TRACKER',
+  trackerId: trackerId
+})
+
 export const setValueTracker = (trackerId, value) => ({
   type: 'SET_VALUE',
   trackerId: trackerId,

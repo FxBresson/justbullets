@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   bigTitle: {
     fontSize: 18,
     fontWeight: '700',
-    marginTop: 24,
+    marginTop: 16,
     textAlign: 'left',
   },
 })

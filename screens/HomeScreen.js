@@ -14,11 +14,13 @@ import { bindActionCreators } from 'redux'
 
 import { commons } from '../styles'
 import MiddleTitle from '../components/MiddleTitle'
-import { 
+import InputTracker from '../components/InputTracker'
+
+import {
   selectMood,
   incrementTracker,
   decrementTracker,
-  toggleTracker
+  toggleTracker,
 } from '../action'
 
 import { CheckBox, Button } from 'react-native-elements'
@@ -55,8 +57,13 @@ class HomeScreen extends React.Component {
           />
           <Button
             buttonStyle={commons.button}
+            onPress={() => this.props.selectMood(index, 'frustrated')}
+            title="Frustrated"
+          />
+          <Button
+            buttonStyle={commons.button}
             onPress={() => this.props.selectMood(index, 'confused')}
-            title="Confused/Frustrated"
+            title="Confused"
           />
         </View>
       </View>
@@ -86,7 +93,7 @@ class HomeScreen extends React.Component {
           key={i}
           checked={checked}
           onPress={() => {
-            if (canPress) { 
+            if (canPress) {
               this.handleGoalCheckbox(checked, index)
             }
           }}
@@ -105,15 +112,17 @@ class HomeScreen extends React.Component {
   }
 
   _renderBoolTracker(tracker, index) {
-    let value = this.props.today.find((e) => e.id === index).value
+    let value = this.props.today.find(e => e.id === index).value
 
-    return(
+    return (
       <View key={index}>
         <MiddleTitle>{tracker.title}</MiddleTitle>
         <View>
           <CheckBox
-              checked={value}
-              onPress={() => {this.handleBoolCheckbox(index)}}
+            checked={value}
+            onPress={() => {
+              this.handleBoolCheckbox(index)
+            }}
           />
         </View>
       </View>
@@ -121,37 +130,37 @@ class HomeScreen extends React.Component {
   }
 
   _renderInputTracker(tracker, index) {
-    return (
-      <View key={index}>
-        <MiddleTitle>{tracker.title}</MiddleTitle>
-      </View>
-    )
+    let value = this.props.today.find(e => e.id === index).value
+    return <InputTracker tracker={tracker} key={index} value={value} />
   }
 
   render() {
     const { navigate } = this.props.navigation
 
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-          {this.props.trackers.filter(t => t.active === true).map((tracker, i) => {
-
-            switch(tracker.type) {
-              case 'mood':
-                return this._renderMoodTracker(tracker, i)
-              case 'bool':
-                return this._renderBoolTracker(tracker, i)
-              case 'normal': 
-                if (tracker.goal !== null) {
-                  return this._renderGoalTracker(tracker, i)
-                } else {
-                  return this._renderInputTracker(tracker, i)
-                }
-              default: 
-                return null
-            }        
-          })}
+      <View style={[styles.container]}>
+        <ScrollView
+          style={[styles.container]}
+          contentContainerStyle={[styles.contentContainer, commons.paddingPage]}
+        >
+          {this.props.trackers
+            .filter(t => t.active === true)
+            .map((tracker, i) => {
+              switch (tracker.type) {
+                case 'mood':
+                  return this._renderMoodTracker(tracker, i)
+                case 'bool':
+                  return this._renderBoolTracker(tracker, i)
+                case 'normal':
+                  if (tracker.goal !== null) {
+                    return this._renderGoalTracker(tracker, i)
+                  } else {
+                    return this._renderInputTracker(tracker, i)
+                  }
+                default:
+                  return null
+              }
+            })}
         </ScrollView>
         <Button title="AddTracker" onPress={() => navigate('Add')} />
       </View>
@@ -159,14 +168,16 @@ class HomeScreen extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => (
-  bindActionCreators({
-    selectMood,
-    incrementTracker,
-    decrementTracker,
-    toggleTracker
-  }, dispatch)
-);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      selectMood,
+      incrementTracker,
+      decrementTracker,
+      toggleTracker,
+    },
+    dispatch,
+  )
 
 const mapStateToProps = state => {
   return ({ trackers, today, history } = state)

@@ -9,8 +9,6 @@ import rootReducer from './reducers/index'
 
 import { defaultValue } from './helper'
 
-
-
 const defaultState = {
   trackers: [
     {
@@ -18,8 +16,7 @@ const defaultState = {
       title: "Comment ça va aujourd'hui ?",
       type: 'mood',
       period: 'day',
-      goal: null,
-        active: true
+      active: true,
     },
     {
       id: 1,
@@ -27,14 +24,14 @@ const defaultState = {
       type: 'normal',
       period: 'week',
       goal: 2,
-      active: true
+      active: true,
     },
     {
       id: 2,
       title: 'Nourrir Toothless',
       type: 'bool',
       period: 'day',
-      active: true
+      active: true,
     },
     {
       id: 3,
@@ -42,7 +39,7 @@ const defaultState = {
       type: 'normal',
       period: 'day',
       goal: 1,
-      active: true
+      active: true,
     },
     {
       id: 4,
@@ -50,17 +47,24 @@ const defaultState = {
       type: 'normal',
       period: 'month',
       goal: 4,
-      active: true
+      active: true,
+    },
+    {
+      id: 5,
+      title: 'Heures de sommeil (dodo)',
+      type: 'normal',
+      period: 'day',
+      goal: null,
+      active: true,
     },
   ],
   today: [],
 }
 
-
 defaultState.today = defaultState.trackers.map(tracker => {
   return {
     id: tracker.id,
-    value: defaultValue(tracker.type)
+    value: defaultValue(tracker.type),
   }
 })
 

@@ -1,4 +1,5 @@
 import { defaultValue } from '../helper'
+import moment from 'moment'
 
 const todayReducer = (state = [], action) => {
     switch (action.type) {
@@ -56,6 +57,28 @@ const todayReducer = (state = [], action) => {
       return state.map(e => {
         if (e.id === action.trackerId) {
           e.value = action.mood
+        }
+        return e
+      })
+
+    case 'SAVE_DAY': 
+      let today = moment()
+    
+      return state.map((e, i) => {
+        let tracker = action.trackerList[i]
+
+        switch(tracker.period) {
+          case 'day':
+            e.value = defaultValue(tracker.type)
+          case 'week':
+            if (today.isoWeekday() === 0) {
+              e.value = defaultValue(tracker.type)
+            }
+          case 'month':
+            if (today === today.startOf('month')) {
+              e.value = defaultValue(tracker.type)
+            }
+          default:
         }
         return e
       })

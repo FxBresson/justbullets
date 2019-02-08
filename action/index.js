@@ -35,8 +35,8 @@ export const selectMood = (trackerId, mood) => ({
   mood: mood
 })
 
-export const saveDay = (day) => ({
+export const saveDay = (trackerList) => ({
   type: 'SAVE_DAY',
-  day: day
+  trackerList: trackerList
 })
 

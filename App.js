@@ -7,66 +7,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers/index'
 
-import { defaultValue } from './helper'
-
-const defaultState = {
-  trackers: [
-    {
-      id: 0,
-      title: "Comment ça va aujourd'hui ?",
-      type: 'mood',
-      period: 'day',
-      active: true,
-    },
-    {
-      id: 1,
-      title: 'Invoquer Satan',
-      type: 'normal',
-      period: 'week',
-      goal: 2,
-      active: true,
-    },
-    {
-      id: 2,
-      title: 'Nourrir Toothless',
-      type: 'bool',
-      period: 'day',
-      active: true,
-    },
-    {
-      id: 3,
-      title: 'Règles',
-      type: 'normal',
-      period: 'day',
-      goal: 1,
-      active: true,
-    },
-    {
-      id: 4,
-      title: 'Cinéma',
-      type: 'normal',
-      period: 'month',
-      goal: 4,
-      active: true,
-    },
-    {
-      id: 5,
-      title: 'Heures de sommeil (dodo)',
-      type: 'normal',
-      period: 'day',
-      goal: null,
-      active: true,
-    },
-  ],
-  today: [],
-}
-
-defaultState.today = defaultState.trackers.map(tracker => {
-  return {
-    id: tracker.id,
-    value: defaultValue(tracker.type),
-  }
-})
+import defaultState from './data/default'
 
 const store = createStore(rootReducer, defaultState)
 

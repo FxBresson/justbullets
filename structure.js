@@ -76,14 +76,27 @@ const structure = {
         null,
         null,
     ],
-    history: [
-        {
-            day: 25,
-            month: 1,
-            week: 5,
-            year: 2019,
-            date: "25-01-2019",
-            data: []
-        }
-    ]
+    history: {
+        year: [{
+            value: 2019,
+            children: [ //month
+                {
+                    value: 1,
+                    trackers: [],
+                    children: [ //week
+                        { 
+                            value: 4,
+                            trackers: [],
+                            children: [ //day
+                                { 
+                                    value: 24,
+                                    trackers: []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }]
+    }
 }

@@ -112,6 +112,7 @@ class HomeScreen extends React.Component {
     return (
       <View key={index}>
         <MiddleTitle>{tracker.title}</MiddleTitle>
+        <Text>{tracker.period}</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           {checkboxes}
         </View>

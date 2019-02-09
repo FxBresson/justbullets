@@ -3,13 +3,15 @@ import { StyleSheet, Text } from 'react-native'
 
 export default class MiddleTitle extends React.Component {
   render() {
-    const { children } = this.props
-    return <Text style={styles.bigTitle}>{children}</Text>
+    const { children, align = 'left' } = this.props
+    return (
+      <Text style={[styles.middleTitle, { textAlign: align }]}>{children}</Text>
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  bigTitle: {
+  middleTitle: {
     fontSize: 18,
     fontWeight: '700',
     marginTop: 16,

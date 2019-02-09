@@ -1,9 +1,16 @@
 import React from 'react'
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native'
 import { connect } from 'react-redux'
-import { commons } from '../styles'
+import { commons, button } from '../styles'
 import MiddleTitle from '../components/MiddleTitle'
 import moment from 'moment'
+import { Button } from 'react-native-elements'
 
 class StatsScreen extends React.Component {
   static navigationOptions = {
@@ -13,25 +20,29 @@ class StatsScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation
 
-    let year = this.props.history.year[this.props.history.year.length-1]
+    let year = this.props.history.year[this.props.history.year.length - 1]
 
     return (
       <ScrollView style={[styles.container, commons.paddingPage]}>
-        <Text>{year.value}</Text>
-        {moment.monthsShort().map((monthName, i) => {
-          return (
-            <TouchableOpacity key={i} 
-                  onPress={() => navigate('Month', {
-                    month: i,
-                    history: year.children[i]
-                  })}
-            >
-              <Text>{monthName}</Text>
-            </TouchableOpacity>
-          )
-        })
-        }
-
+        <MiddleTitle align="center">{year.value}</MiddleTitle>
+        <View style={styles.monthWrapper}>
+          {moment.monthsShort().map((monthName, i) => {
+            return (
+              <View style={button.wrapper} key={i}>
+                <Button
+                  buttonStyle={[commons.button]}
+                  title={monthName}
+                  onPress={() =>
+                    navigate('Month', {
+                      month: i,
+                      history: year.children[i],
+                    })
+                  }
+                />
+              </View>
+            )
+          })}
+        </View>
       </ScrollView>
     )
   }
@@ -49,4 +60,8 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  month: {
+    width: '33%',
+  },
+  monthWrapper: { flexDirection: 'row', flexWrap: 'wrap', marginTop: 24 },
 })

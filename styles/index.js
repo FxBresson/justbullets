@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const colors = {
   check: '#72ffcb',
+  disabled: '#E4E4E4',
 }
 
 const commons = StyleSheet.create({
@@ -23,18 +24,28 @@ const button = StyleSheet.create({
   round: {
     width: 40,
   },
+  disabled: {
+    backgroundColor: colors.disabled,
+  },
+  wrapper: {
+    width: '33%',
+  },
 })
 
 const checkbox = StyleSheet.create({
   default: {
     borderRadius: 50,
     height: 30,
-    width: 30,
+    // width: 30,
     alignItems: 'center',
     justifyContent: 'center',
     margin: 4,
+    backgroundColor: 'white',
     borderColor: '#AAAAAA',
     borderWidth: 1,
+  },
+  round: {
+    width: 30,
   },
   check: {
     backgroundColor: colors.check,

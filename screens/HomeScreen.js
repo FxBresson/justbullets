@@ -32,43 +32,37 @@ class HomeScreen extends React.Component {
 
   _renderMoodTracker(tracker, index) {
     let value = this.props.today.find(e => e.id === index).value
+    const moods = {
+      happy: 'Happy',
+      sad: 'Sad',
+      neutral: 'Neutral',
+      angry: 'Angry',
+      frustrated: 'Frustrated',
+      confused: 'Confused',
+    }
+
     return (
       <View key={index}>
         <MiddleTitle>{tracker.title}</MiddleTitle>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-          <Button
-            buttonStyle={[commons.button, value === 'happy' && button.check]}
-            onPress={() => this.props.selectMood(index, 'happy')}
-            title="Happy"
-          />
-          <Button
-            buttonStyle={[commons.button, value === 'sad' && button.check]}
-            onPress={() => this.props.selectMood(index, 'sad')}
-            title="Sad"
-          />
-          <Button
-            buttonStyle={[commons.button, value === 'neutral' && button.check]}
-            onPress={() => this.props.selectMood(index, 'neutral')}
-            title="Neutral"
-          />
-          <Button
-            buttonStyle={[commons.button, value === 'angry' && button.check]}
-            onPress={() => this.props.selectMood(index, 'angry')}
-            title="Angry"
-          />
-          <Button
-            buttonStyle={[
-              commons.button,
-              value === 'frustrated' && button.check,
-            ]}
-            onPress={() => this.props.selectMood(index, 'frustrated')}
-            title="Frustrated"
-          />
-          <Button
-            buttonStyle={[commons.button, value === 'confused' && button.check]}
-            onPress={() => this.props.selectMood(index, 'confused')}
-            title="Confused"
-          />
+          {Object.keys(moods).map((mood, i) => {
+            return (
+              <View key={i} style={button.wrapper}>
+                <Button
+                  titleStyle={[
+                    checkbox.text,
+                    value === mood && checkbox.textCheck,
+                  ]}
+                  buttonStyle={[
+                    checkbox.default,
+                    value === mood && checkbox.check,
+                  ]}
+                  onPress={() => this.props.selectMood(index, mood)}
+                  title={moods[mood]}
+                />
+              </View>
+            )
+          })}
         </View>
       </View>
     )
@@ -94,7 +88,7 @@ class HomeScreen extends React.Component {
       let canPress = i <= curr + 1
       checkboxes.push(
         <TouchableOpacity
-          style={[checkbox.default, checked && checkbox.check]}
+          style={[checkbox.default, checkbox.round, checked && checkbox.check]}
           key={i}
           onPress={() => {
             if (canPress) {

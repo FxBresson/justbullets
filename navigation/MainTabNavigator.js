@@ -8,6 +8,7 @@ import StatsScreen from '../screens/StatsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import AddTracker from '../screens/AddTracker';
 import MonthStatScreen from '../screens/MonthStatScreen';
+import WeekStatScreen from '../screens/WeekStatScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -30,7 +31,8 @@ HomeStack.navigationOptions = {
 
 const StatsStack = createStackNavigator({
   Stats: StatsScreen,
-  Month: MonthStatScreen
+  Month: MonthStatScreen,
+  Week: WeekStatScreen
 });
 
 StatsStack.navigationOptions = {

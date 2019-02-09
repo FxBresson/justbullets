@@ -27,6 +27,7 @@ class StatsScreen extends React.Component {
         <MiddleTitle align="center">{year.value}</MiddleTitle>
         <View style={styles.monthWrapper}>
           {moment.monthsShort().map((monthName, i) => {
+          if (year.children[i] !== undefined) {
             return (
               <View style={button.wrapper} key={i}>
                 <Button
@@ -34,14 +35,20 @@ class StatsScreen extends React.Component {
                   title={monthName}
                   onPress={() =>
                     navigate('Month', {
-                      month: i,
+                      monthNumber: i,
                       history: year.children[i],
                     })
                   }
                 />
               </View>
             )
-          })}
+          } else {
+            return (
+              <View key={i}>
+                <Text>{monthName}</Text>
+              </View>
+            )
+          }})}
         </View>
       </ScrollView>
     )

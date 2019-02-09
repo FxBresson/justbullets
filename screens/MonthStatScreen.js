@@ -1,13 +1,14 @@
 import React from 'react'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import MiddleTitle from '../components/MiddleTitle'
+import TrackerValue from '../components/TrackerValue'
 import { connect } from 'react-redux'
 import { commons } from '../styles'
 import moment from 'moment'
 
 class MonthStatScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `${moment.months()[navigation.state.params.month]}`,
+    title: `${moment.months()[navigation.state.params.monthNumber]}`,
   });
 
   _renderTrackerValue(index, value, goal, type) {
@@ -24,22 +25,38 @@ class MonthStatScreen extends React.Component {
   }
 
   render() {
+
     const { navigation } = this.props;
-    const history = navigation.getParam('history')
+    const monthHistory = navigation.getParam('history')
 
     return (
       <ScrollView style={[styles.container, commons.paddingPage]}>
-        <Text>Trackers</Text>
-        {history.trackers.map((tracker, i) => {
-          let trackerInfos = this.props.trackers.find(e => e.id === tracker.id)
-          return (
-            <View key={i}>
-              <MiddleTitle>{trackerInfos.title}</MiddleTitle>
-              <View>{this._renderTrackerValue(i, tracker.value, trackerInfos.goal, trackerInfos.type)}</View>
-            </View>
-          )
-        })}
-      
+        <View>
+          <Text>Trackers</Text>
+          {monthHistory.trackers.map((tracker, i) => {
+            let trackerInfos = this.props.trackers.find(e => e.id === tracker.id)
+            return (
+              <View key={i}>
+                <MiddleTitle>{trackerInfos.title}</MiddleTitle>
+                <TrackerValue value={tracker.value} goal={trackerInfos.goal} type={trackerInfos.type} />
+              </View>
+            )
+          })}
+        </View>
+        <View>
+          {monthHistory.children.map((week, i) => {
+            return (
+              <TouchableOpacity key={i} 
+                onPress={() => navigation.navigate('Week', {
+                  weekNumber: week.value,
+                  history: week
+                })}
+              >
+                <Text>Week n°{week.value}</Text>
+              </TouchableOpacity>
+            )
+          })}
+        </View>
       </ScrollView>
     )
   }

@@ -27,6 +27,10 @@ class WeekStatScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     const weekHistory = navigation.getParam('history')
+    const dayTrackers = this.props.trackers.filter(e => e.period === 'day')
+
+    let daysName = moment.weekdaysMin();
+    daysName.push(daysName.shift())
 
     return (
       <ScrollView style={[styles.container, commons.paddingPage]}>
@@ -42,13 +46,41 @@ class WeekStatScreen extends React.Component {
             )
           })}
         </View>
-        <View>
-          {weekHistory.children.map((day, i) => {
+          {/* {daysName.map((dayName, i) => { */}
+          {/* {weekHistory.children.map((day, i) => { */}
+        <MiddleTitle><Text>Trackers</Text></MiddleTitle>
+        <ScrollView horizontal={true} style>
+          <View>
+            <View><Text> </Text></View>
+            {dayTrackers.map((tracker, i)=>{
+              return (
+                <View key={i}>
+                  <Text>{tracker.title}</Text>
+                </View>
+              )
+            })}
+          </View>
+          {daysName.map((dayName, i) => {
             return (
-              <View></View>
+              <View key={i}>
+                <View><Text>{dayName}</Text></View>
+                {weekHistory.children[i] !== undefined && weekHistory.children[i].trackers !== undefined ?
+                  weekHistory.children[i].trackers.map((tracker, j) => {
+                    let trackerInfos = dayTrackers.find(e => e.id === tracker.id)
+                    return (
+                      <View key={j}>
+                        <TrackerValue value={tracker.value} goal={trackerInfos.goal} type={trackerInfos.type} />
+                      </View>
+                    )
+                  })
+                :
+                  <View></View>
+                }
+              </View>
             )
           })}
-        </View>
+          
+        </ScrollView>
       </ScrollView>
     )
   }

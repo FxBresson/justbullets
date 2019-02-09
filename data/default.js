@@ -55,15 +55,16 @@ const defaultState = {
                         { 
                             value: 5,
                             trackers: [
-                                {id: 2, value: 0}
+                                {id: 1, value: 2}
                             ],
                             children: [ //day
+                                {},{},{},
                                 { 
                                     value: 31,
                                     trackers: [
-                                        {id: 0,value:'happy'},
-                                        {id: 2,value:false},
-                                        {id: 4,value:7},
+                                        {id: 0,value:'sad'},
+                                        {id: 2,value:true},
+                                        {id: 4,value:9},
                                     ]
                                 }
                             ]
@@ -79,9 +80,10 @@ const defaultState = {
                         { 
                             value: 5,
                             trackers: [
-                                {id: 2, value: 0}
+                                {id: 1, value: 0}
                             ],
                             children: [ //day
+                                {},{},{},{},
                                 { 
                                     value: 1,
                                     trackers: [

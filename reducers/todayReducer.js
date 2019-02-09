@@ -2,16 +2,16 @@ import { defaultValue } from '../helper'
 import moment from 'moment'
 
 const todayReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'ADD_TRACKER': 
-            let t = {
-                id: state.length,
-                value: defaultValue(action.newTracker.type)
-            }
-            return [...state, t]
+  switch (action.type) {
+    case 'ADD_TRACKER':
+      let t = {
+        id: state.length,
+        value: defaultValue(action.newTracker.type),
+      }
+      return [...state, t]
 
     case 'REMOVE_TRACKER':
-      return state.splice(state.findIndex(e => e === action.trackerId), 1)
+      return state
 
     case 'INCREMENT_TRACKER':
       return state.map(e => {
@@ -21,29 +21,29 @@ const todayReducer = (state = [], action) => {
         return e
       })
 
-        case 'DECREMENT_TRACKER': 
-            return state.map((e) => {
-                if (e.id === action.trackerId) {
-                    e.value = Math.max(0, --e.value)
-                }
-                return e
-            })
+    case 'DECREMENT_TRACKER':
+      return state.map(e => {
+        if (e.id === action.trackerId) {
+          e.value = Math.max(0, --e.value)
+        }
+        return e
+      })
 
-        case 'TOGGLE_TRACKER':
-            return state.map((e) => {
-                if (e.id === action.trackerId) {
-                    e.value = !e.value
-                }
-                return e
-            })
-            
-        case 'SET_VALUE':
-            return state.map((e) => {
-                if (e.id === action.trackerId && !isNaN(action.value)) {
-                    e.value = action.value
-                }
-                return e
-            })
+    case 'TOGGLE_TRACKER':
+      return state.map(e => {
+        if (e.id === action.trackerId) {
+          e.value = !e.value
+        }
+        return e
+      })
+
+    case 'SET_VALUE':
+      return state.map(e => {
+        if (e.id === action.trackerId && !isNaN(action.value)) {
+          e.value = action.value
+        }
+        return e
+      })
 
     case 'SET_VALUE':
       return state.map(e => {
@@ -61,17 +61,17 @@ const todayReducer = (state = [], action) => {
         return e
       })
 
-    case 'SAVE_DAY': 
+    case 'SAVE_DAY':
       let today = moment()
-    
+
       return state.map((e, i) => {
         let tracker = action.trackerList[i]
 
-        switch(tracker.period) {
+        switch (tracker.period) {
           case 'day':
             e.value = defaultValue(tracker.type)
           case 'week':
-            if (today.isoWeekday() === 0) {
+            if (today.isoWeekday() === 0) {
               e.value = defaultValue(tracker.type)
             }
           case 'month':

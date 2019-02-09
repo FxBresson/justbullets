@@ -27,28 +27,32 @@ class StatsScreen extends React.Component {
         <MiddleTitle align="center">{year.value}</MiddleTitle>
         <View style={styles.monthWrapper}>
           {moment.monthsShort().map((monthName, i) => {
-          if (year.children[i] !== undefined) {
-            return (
-              <View style={button.wrapper} key={i}>
-                <Button
-                  buttonStyle={[commons.button]}
-                  title={monthName}
-                  onPress={() =>
-                    navigate('Month', {
-                      monthNumber: i,
-                      history: year.children[i],
-                    })
-                  }
-                />
-              </View>
-            )
-          } else {
-            return (
-              <View key={i}>
-                <Text>{monthName}</Text>
-              </View>
-            )
-          }})}
+            if (year.children[i] !== undefined) {
+              return (
+                <View style={button.wrapper} key={i}>
+                  <Button
+                    buttonStyle={[commons.button]}
+                    title={monthName}
+                    onPress={() =>
+                      navigate('Month', {
+                        monthNumber: i,
+                        history: year.children[i],
+                      })
+                    }
+                  />
+                </View>
+              )
+            } else {
+              return (
+                <View style={button.wrapper} key={i}>
+                  <Button
+                    buttonStyle={[commons.button, button.disabled]}
+                    title={monthName}
+                  />
+                </View>
+              )
+            }
+          })}
         </View>
       </ScrollView>
     )

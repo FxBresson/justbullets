@@ -15,19 +15,25 @@ import { bindActionCreators } from 'redux'
 import { commons, button, checkbox } from '../styles'
 import MiddleTitle from '../components/MiddleTitle'
 import InputTracker from '../components/InputTracker'
+import RemoveIcon from '../components/RemoveIcon'
 
 import {
   selectMood,
   incrementTracker,
   decrementTracker,
   toggleTracker,
+  removeTracker,
 } from '../action'
 
-import { CheckBox, Button } from 'react-native-elements'
+import { CheckBox, Button, Icon } from 'react-native-elements'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Today',
+  }
+
+  _deleteTracker = id => {
+    this.props.removeTracker(id)
   }
 
   _renderMoodTracker(tracker, index) {
@@ -43,7 +49,20 @@ class HomeScreen extends React.Component {
 
     return (
       <View key={index}>
-        <MiddleTitle>{tracker.title}</MiddleTitle>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            marginBottom: 8,
+          }}
+        >
+          <MiddleTitle>{tracker.title}</MiddleTitle>
+          <RemoveIcon
+            deleteTracker={() => {
+              this._deleteTracker(tracker.id)
+            }}
+          />
+        </View>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           {Object.keys(moods).map((mood, i) => {
             return (
@@ -105,7 +124,20 @@ class HomeScreen extends React.Component {
 
     return (
       <View key={index}>
-        <MiddleTitle>{tracker.title}</MiddleTitle>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            marginBottom: 8,
+          }}
+        >
+          <MiddleTitle>{tracker.title}</MiddleTitle>
+          <RemoveIcon
+            deleteTracker={() => {
+              this._deleteTracker(tracker.id)
+            }}
+          />
+        </View>
         <Text>{tracker.period}</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           {checkboxes}
@@ -119,7 +151,20 @@ class HomeScreen extends React.Component {
 
     return (
       <View key={index}>
-        <MiddleTitle>{tracker.title}</MiddleTitle>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            marginBottom: 8,
+          }}
+        >
+          <MiddleTitle>{tracker.title}</MiddleTitle>
+          <RemoveIcon
+            deleteTracker={() => {
+              this._deleteTracker(tracker.id)
+            }}
+          />
+        </View>
         <TouchableOpacity
           style={[
             checkbox.default,
@@ -145,7 +190,14 @@ class HomeScreen extends React.Component {
 
   _renderInputTracker(tracker, index) {
     let value = this.props.today.find(e => e.id === index).value
-    return <InputTracker tracker={tracker} key={index} value={value} />
+    return (
+      <InputTracker
+        tracker={tracker}
+        key={index}
+        value={value}
+        deleteTracker={this._deleteTracker}
+      />
+    )
   }
 
   render() {
@@ -189,6 +241,7 @@ const mapDispatchToProps = dispatch =>
       incrementTracker,
       decrementTracker,
       toggleTracker,
+      removeTracker,
     },
     dispatch,
   )

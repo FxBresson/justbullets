@@ -1,18 +1,32 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import MiddleTitle from './MiddleTitle'
-import { Button } from 'react-native-elements'
+import { Button, Icon } from 'react-native-elements'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { incrementTracker, decrementTracker } from '../action'
 import { commons, button } from '../styles'
+import RemoveIcon from './RemoveIcon'
 
 class InputTracker extends React.Component {
   render() {
-    const { tracker, value } = this.props
+    const { tracker, value, deleteTracker } = this.props
     return (
       <View>
-        <MiddleTitle>{tracker.title}</MiddleTitle>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            marginBottom: 8,
+          }}
+        >
+          <MiddleTitle>{tracker.title}</MiddleTitle>
+          <RemoveIcon
+            deleteTracker={() => {
+              deleteTracker(tracker.id)
+            }}
+          />
+        </View>
         <View style={styles.form}>
           <Button
             title="-"

@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import MiddleTitle from '../components/MiddleTitle'
 import BigTitle from '../components/BigTitle'
 import TrackerValue from '../components/TrackerValue'

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import MiddleTitle from './MiddleTitle'
-import { Button, Icon } from 'react-native-elements'
+import { Button } from 'react-native-elements'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { incrementTracker, decrementTracker } from '../action'

@@ -5,7 +5,7 @@ export default class TrackerValue extends React.Component {
   render() {
     const { value, goal, type, week } = this.props
     let goalText = goal !== null && goal !== undefined ? `/${goal}` : ''
-    let valueText = type === 'bool' ? (value ? 'Done' : 'Not Done') : value
+    let valueText = type === 'bool' ? (value ? 'done' : '-') : value
 
     return (
       <View>

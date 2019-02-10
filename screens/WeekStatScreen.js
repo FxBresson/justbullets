@@ -93,7 +93,11 @@ class WeekStatScreen extends React.Component {
                         return (
                           <View key={idDay} style={styles.column}>
                             <TrackerValue
-                              value={weekHistory.children[idDay].trackers.find(e => e.id === tracker.id).value}
+                              value={
+                                weekHistory.children[idDay].trackers.find(
+                                  e => e.id === tracker.id,
+                                ).value
+                              }
                               goal={tracker.goal}
                               type={tracker.type}
                               key={i}
@@ -101,7 +105,18 @@ class WeekStatScreen extends React.Component {
                             />
                           </View>
                         )
-                      } else return <View key={idDay} style={styles.column} />
+                      } else
+                        return (
+                          <View key={idDay} style={styles.column}>
+                            <TrackerValue
+                              value={tracker.type === 'bool' ? false : '-'}
+                              goal={tracker.goal}
+                              type={tracker.type}
+                              key={i}
+                              week
+                            />
+                          </View>
+                        )
                     })}
                   </View>
                 </View>

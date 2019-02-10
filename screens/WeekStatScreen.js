@@ -77,9 +77,9 @@ class WeekStatScreen extends React.Component {
                 </Text>
               ))}
             </View>
-            {dayTrackers.map((tracker, idTracker) => {
+            {dayTrackers.map((tracker, i) => {
               return (
-                <View key={idTracker}>
+                <View key={i}>
                   {/* TRACKER NAME */}
                   <MiddleTitle>{tracker.title}</MiddleTitle>
 
@@ -92,24 +92,13 @@ class WeekStatScreen extends React.Component {
                       ) {
                         return (
                           <View key={idDay} style={styles.column}>
-                            {weekHistory.children[idDay].trackers
-                              .filter(t => {
-                                return t.id === idTracker
-                              })
-                              .map((tracker, idTracker) => {
-                                let trackerInfos = dayTrackers.find(
-                                  e => e.id === tracker.id,
-                                )
-                                return (
-                                  <TrackerValue
-                                    value={tracker.value}
-                                    goal={trackerInfos.goal}
-                                    type={trackerInfos.type}
-                                    key={idTracker}
-                                    week
-                                  />
-                                )
-                              })}
+                            <TrackerValue
+                              value={weekHistory.children[idDay].trackers.find(e => e.id === tracker.id).value}
+                              goal={tracker.goal}
+                              type={tracker.type}
+                              key={i}
+                              week
+                            />
                           </View>
                         )
                       } else return <View key={idDay} style={styles.column} />
